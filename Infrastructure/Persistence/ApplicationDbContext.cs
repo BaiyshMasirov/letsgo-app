@@ -12,12 +12,12 @@ using System.Security.Claims;
 
 namespace Infrastructure.Persistence
 {
-    public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>, IApplicationDbContext
+    public class ApplicationEFContext : IdentityDbContext<User, Role, Guid>, IApplicationEFContext
     {
         private IDbContextTransaction _currentTransaction;
         private readonly IDateTime _dateTime;
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
+        public ApplicationEFContext(DbContextOptions<ApplicationEFContext> options,
                              IDateTime dateTime) : base(options)
         {
             _dateTime = dateTime;

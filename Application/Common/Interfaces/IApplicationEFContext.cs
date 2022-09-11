@@ -2,7 +2,7 @@
 
 namespace Application.Common.Interfaces
 {
-    public interface IApplicationDbContext
+    public interface IApplicationEFContext
     {
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 
