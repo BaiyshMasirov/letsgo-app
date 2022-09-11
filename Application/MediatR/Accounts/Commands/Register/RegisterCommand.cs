@@ -1,5 +1,4 @@
-﻿using Application.Common.Interfaces;
-using Application.Models;
+﻿using Application.Models;
 using Domain.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -19,19 +18,13 @@ namespace Application.MediatR.Accounts.Commands.Register
 
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result>
     {
-        private readonly IApplicationEFContext _context;
         private readonly UserManager<User> _userManager;
-        private readonly IRtTokenService _rtTokenService;
         private readonly ILogger<RegisterCommandHandler> _logger;
 
-        public RegisterCommandHandler(IApplicationEFContext context,
-                                      UserManager<User> userManager,
-                                      IRtTokenService rtTokenService,
+        public RegisterCommandHandler(UserManager<User> userManager,
                                       ILogger<RegisterCommandHandler> logger)
         {
-            _context = context;
             _userManager = userManager;
-            _rtTokenService = rtTokenService;
             _logger = logger;
         }
 
@@ -53,13 +46,13 @@ namespace Application.MediatR.Accounts.Commands.Register
 
                 IdentityResult result = await _userManager.CreateAsync(user, request.Password);
 
-                string rToken = await _rtTokenService.GenerateRToken(user.Id);
-                if (string.IsNullOrWhiteSpace(rToken))
-                    return Result.Failure("Не удалось сформировать токен");
+                /* string rToken = await _rtTokenService.GenerateRToken(user.Id);
+                 if (string.IsNullOrWhiteSpace(rToken))
+                     return Result.Failure("Не удалось сформировать токен");
 
-                var token = _rtTokenService.GenerateJwtToken(user);
+                 var token = _rtTokenService.GenerateJwtToken(user);*/
 
-                return Result.Success(new ApiUserToken(token, rToken));
+                return Result.Success("Заявка отправлена, ожидайте подтверждения");
             }
             catch (Exception ex)
             {

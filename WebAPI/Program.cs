@@ -1,3 +1,4 @@
+using Application;
 using Infrastructure;
 using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
@@ -8,7 +9,8 @@ Log.Logger = new LoggerConfiguration()
               .Enrich.FromLogContext()
               .CreateLogger();
 
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication()
+                .AddInfrastructure(builder.Configuration);
 builder.Host.UseSerilog();
 
 builder.Services.AddControllers();

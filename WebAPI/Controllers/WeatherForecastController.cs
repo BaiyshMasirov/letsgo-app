@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [ApiController]
+   /* [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
@@ -29,5 +29,5 @@ namespace WebAPI.Controllers
             })
             .ToArray();
         }
-    }
+    }*/
 }

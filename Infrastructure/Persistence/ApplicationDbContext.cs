@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Common;
+using Domain.Entities;
 using Domain.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -22,6 +23,11 @@ namespace Infrastructure.Persistence
         {
             _dateTime = dateTime;
         }
+
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<RToken> RTokens { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken token = new CancellationToken())
         {

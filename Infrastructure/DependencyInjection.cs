@@ -32,6 +32,7 @@ namespace Infrastructure
             services.AddScoped<IApplicationEFContext>(provider => provider.GetService<ApplicationEFContext>());
             services.AddScoped<IApplicationDapperContext, ApplicationDapperContext>();
             services.AddTransient<IDateTime, DateTimeService>();
+            services.AddTransient<IRtTokenService, RtTokenService>();
 
             return services;
         }
