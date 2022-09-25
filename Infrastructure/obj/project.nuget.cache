@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QPoHzztOxlWNelNeyQkgjVXAbhWyQitHP1UyhuNlA8EuIRRP3QIituKPbhYqRcQAJoza6f2Lvpmbfg0nkwFzyQ==",
+  "dgSpecHash": "kkN4PJPNxghNZlnnSlMWMGDta802StxtxwretaaRcMDxHZoXD367zw4r+wCWcNSPCNISvAqeJPRuAxFo8l7ORg==",
   "success": true,
-  "projectFilePath": "D:\\New folder\\letsgo-app\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "D:\\Docs\\obermind\\New folder\\letsgo-app\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\fluentvalidation\\11.2.1\\fluentvalidation.11.2.1.nupkg.sha512",
@@ -142,18 +142,6 @@
       "level": "Warning",
       "warningLevel": 1,
       "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://10.111.15.123:5055/nuget'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
-    },
-    {
-      "code": "NU1803",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://10.111.15.59:5055/nuget'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
-    },
-    {
-      "code": "NU1803",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://10.111.15.123:4444/nuget'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
     }
   ]
 }

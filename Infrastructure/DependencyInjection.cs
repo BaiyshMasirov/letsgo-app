@@ -17,6 +17,8 @@ namespace Infrastructure
             services.AddDbContext<ApplicationEFContext>(options =>
               options.UseNpgsql(configuration.GetConnectionString("ApplicationConnectionWrite")));
 
+            services.AddScoped<IApplicationEFContext>(provider => provider.GetService<ApplicationEFContext>());
+
             services.AddIdentity<User, Role>(opts =>
             {
                 opts.Password.RequiredLength = 8;
@@ -29,7 +31,7 @@ namespace Infrastructure
             .AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>()
             .AddDefaultTokenProviders();
 
-            services.AddScoped<IApplicationEFContext>(provider => provider.GetService<ApplicationEFContext>());
+         
             services.AddScoped<IApplicationDapperContext, ApplicationDapperContext>();
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddTransient<IRtTokenService, RtTokenService>();
