@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ГНС - @ViewData["Title"]</title>
+    @* @await Html.PartialAsync("_Favicons") *@
+    <link href="/css/nunito_fonts.css" rel="stylesheet" />
+    <link href="~/css/lite-purple.min.css" rel="stylesheet" />
+    <link href="~/css/perfect-scrollbar.min.css" rel="stylesheet" />
+    <link href="~/css/pace.css" rel="stylesheet" />
+    @RenderSection("Styles", required: false)
+</head>
+
+<body class="text-left">
+
+    <div class="app-admin-wrap layout-sidebar-large">
+        <div class="main-header">
+            <div class="logo">
+                <a asp-controller="Home" asp-action="Index" asp-area="">
+                    <img src="~/images/logo.png" alt="logo" />
+                </a>
+            </div>
+            <div class="menu-toggle">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div style="margin: auto"></div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="header-part-right">
+                    <!-- User avatar dropdown -->
+                <partial name="_UserInfo" />
+                </div>
+            }
+        </div>
+        <partial name="_Sidebar" />
+        @RenderBody()
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery.perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/js/script.js"></script>
+    <script src="~/js/sidebar.large.script.min.js"></script>
+    <script src="~/js/echarts.min.js"></script>
+    <script src="~/js/echarts.options.min.js"></script>
+    <script src="~/js/dashboard.js"></script>
+    <script src="~/js/jquery.mask.min.js"></script>
+    @await Component.InvokeAsync("Notyf")
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

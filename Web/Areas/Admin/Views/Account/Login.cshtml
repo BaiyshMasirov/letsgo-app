@@ -1,0 +1,69 @@
+﻿@model LoginCommand
+
+<div class="row my-5">
+    <div class="col-12">
+        <div class="mb-3 d-flex">
+            <div class="auth_sign">
+                <a class="sign active" asp-area="" asp-controller="Account" asp-action="Login">Вход</a>
+            </div>
+            <div class="auth_registr">
+                <a class="sign_1" asp-area="" asp-controller="Account" asp-action="Create">Регистрация</a>
+            </div>
+            <div class="auth_registr">
+                <a class="sign_1" asp-area="" asp-controller="Account" asp-action="CheckUserStatus">Проверка статуса</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-8 col-md-12 col-xs-12 col-sm-12">
+        <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12 card shadow">
+            <div class="card-body mb-3">
+                <form asp-action="Login" method="post" asp-route-returnurl="@ViewBag.ReturnUrl">
+                    <div class="form-group">
+                        <label asp-for="@Model.Email">Логин</label>
+                        <input asp-for="@Model.Email" class="form-control" />
+                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Password">Пароль</label>
+                        <div class="input-group">
+                            <input type="password" asp-for="@Model.Password" class="form-control" data-toggle="password">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-eye"></i></span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RememberMe" class="checkbox checkbox-outline-primary">
+                            <input asp-for="@Model.RememberMe" type="checkbox" /><span>Запомнить меня</span><span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <a asp-action="ResetPassword" class="font-italic">Забыли пароль?</a>
+                    </div>
+                    <button class="btn btn-primary btn-block mt-2" type="submit">Вход</button>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/js/jquery.mask.min.js"></script>
+<style>
+    .input-validation-error {
+        border: 1px solid red;
+    }
+</style>
+<script>
+    var settings = {
+        validClass: "is-valid",
+        errorClass: "is-invalid"
+
+    };
+    $.validator.setDefaults(settings);
+    $.validator.unobtrusive.options = settings;
+</script>
+@await Component.InvokeAsync("Notyf")

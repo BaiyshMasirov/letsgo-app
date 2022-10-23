@@ -1,0 +1,40 @@
+﻿@model CreateAdminCommand
+
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="entry-form">
+    <h1 class="text-center">Регистрация</h1>
+    <form id="addAdmin-form" asp-controller="Account" asp-action="Register" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label">Электронная почта</label>
+            <input asp-for="Email" class="form-control input-field" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"> </label>
+            <input asp-for="FirstName" class="form-control input-field" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label"> </label>
+            <input asp-for="LastName" class="form-control input-field" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+         <div class="form-group">
+            <label asp-for="MiddleName" class="control-label"> </label>
+            <input asp-for="MiddleName" class="form-control input-field" />
+            <span asp-validation-for="MiddleName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PhoneNumber">Номер телефона</label>
+            <input asp-for="PhoneNumber" class="form-control input-field" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div> 
+        <div class="form-group text-center mb-3">
+            <input type="submit" value="Отправить" class="btn btn-primary form-control btn-submit" />
+        </div>
+    </form>
+</div>

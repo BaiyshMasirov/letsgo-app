@@ -1,0 +1,171 @@
+﻿
+.personal_room {
+    display: flex;
+    align-items: center;
+}
+
+.vl {
+    border-left: 2px solid #D7D8DA;
+    height: 45px;
+    margin: 0px 13px 0px 13px;
+}
+
+.header_txt {
+    width: 205px;
+    line-height: 20px;
+    padding-left: 10px;
+}
+
+.width_box {
+    width: 265px;
+}
+
+
+
+
+.auth_sign:hover a {
+    color: #018A90;
+}
+
+.auth_registr:hover a {
+    color: #018A90;
+    text-decoration: none;
+}
+
+.auth_registr {
+    padding: 0 0 0 40px;
+}
+
+.manual:hover a {
+    color: #018A90;
+    text-decoration: none;
+}
+
+.manual {
+    padding: 0 0 0 40px;
+}
+
+.sign {
+    font-size: 18px;
+    color: #98989E;
+    text-decoration: none;
+    line-height: 16px;
+    position: relative;
+}
+
+
+.sign:after {
+    position: absolute;
+    content: "";
+    top: 25px;
+    left: 0;
+    width: 0;
+    color: #018A90;
+    border-bottom: 2px solid #018A90;
+}
+
+.sign:hover:after {
+    width: 45px;
+    color: #018A90;
+}
+
+.sign_1 {
+    font-size: 18px;
+    color: #98989E;
+    text-decoration: none;
+    line-height: 16px;
+    position: relative;
+}
+
+.sign_1:after {
+    position: absolute;
+    color: red;
+    content: "";
+    top: 25px;
+    left: 0;
+    width: 0;
+    border-bottom: 2px solid #018A90;
+}
+
+.sign_1:hover:after {
+    width: 110px;
+}
+
+
+.manual-a {
+    font-size: 18px;
+    color: #98989E;
+    text-decoration: none;
+    line-height: 16px;
+    position: relative;
+}
+
+.manual-a:after {
+    position: absolute;
+    color: red;
+    content: "";
+    top: 25px;
+    left: 0;
+    width: 0;
+    border-bottom: 2px solid #018A90;
+}
+
+.manual-a:hover:after {
+    width: 110px;
+}
+
+
+.right-box {
+    margin-bottom: 30px;
+    width: 200px;
+    text-decoration: none;
+    position: relative;
+    transition: all .35s;
+}
+.right-box:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    z-index: 1;
+    height: 40px;
+    border-radius: 20px;
+    background-color: rgba(54, 34, 34, 0.1);
+    transition: all .35s;
+}
+
+.right-box:hover:after {
+    width: 200px;
+}
+
+.arrow_img {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+.arrow_txt {
+    font-size: 14px;
+    color: #018A90;
+}
+
+.active {
+    color: #018A90;
+    display: inline-flex;
+    text-decoration: none;
+    padding-bottom: 9px;
+    border-bottom: 2px solid #018A90;
+}
+
+.active_btn {
+    width: 200px;
+    padding-bottom: 0px;
+    border-radius: 20px;
+    background-color: rgba(54, 34, 34, 0.1);
+}
+

@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string[]), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register([FromBody] RegisterCommand command)
+        public async Task<IActionResult> Register([FromBody] CreateAdminCommand command)
         {
             if (ModelState.IsValid)
             {

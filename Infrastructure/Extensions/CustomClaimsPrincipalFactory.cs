@@ -7,11 +7,10 @@ namespace Infrastructure.Extensions
 {
     public class CustomClaimsPrincipalFactory : UserClaimsPrincipalFactory<User, Role>
     {
-        public CustomClaimsPrincipalFactory(
-            UserManager<User> userManager,
-            RoleManager<Role> roleManager,
-            IOptions<IdentityOptions> optionsAccessor)
-                : base(userManager, roleManager, optionsAccessor)
+        public CustomClaimsPrincipalFactory(UserManager<User> userManager,
+                                            RoleManager<Role> roleManager,
+                                            IOptions<IdentityOptions> optionsAccessor)
+                                              : base(userManager, roleManager, optionsAccessor)
         {
         }
 

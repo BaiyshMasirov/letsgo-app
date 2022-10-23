@@ -1,0 +1,75 @@
+﻿.plan-pdf {
+    width: 90%;
+    max-width: 940px;
+    display: none;
+}
+
+.plan-pdf__top {
+    height: 60px;
+    background: #eeeeee;
+}
+
+.plan-pdf__download {
+    color: #000;
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    margin: 18px 0 0 25px;
+    outline: none;
+}
+
+    .plan-pdf__download span {
+        text-decoration: underline;
+        margin: 4px 0 0 10px;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .plan-pdf__download::before {
+        content: "\f019";
+        font-family: FontAwesome;
+        color: #018a90;
+        font-size: 20px;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+.plan-pdf__body iframe,
+.plan-pdf__body img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.fancybox-slide > .plan-pdf {
+    padding: 0;
+}
+
+.plan-pdf .fancybox-close-small {
+    background: #018a90;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    top: 10px;
+    right: 10px;
+}
+
+    .plan-pdf .fancybox-close-small:after {
+        background: #018a90;
+        outline: none;
+        color: #fff;
+        position: static;
+        width: auto;
+        height: auto;
+    }
+
+.fancybox-slide > * {
+    width: 70%;
+    height: 95%;
+    overflow: hidden;
+    max-width: 1200px;
+}
+
+.plan-pdf__body {
+    height: 100%;
+}
