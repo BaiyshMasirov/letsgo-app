@@ -5,16 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace Web.Areas.Admin.Controllers
 {
     [Authorize]
+    [Area("Admin")]
     public class AccountController : BaseController
     {
-        [AllowAnonymous]
-        public IActionResult Register()
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(CreateAdminCommand command)
+        public async Task<IActionResult> Create(CreateAdminCommand command)
         {
             if (ModelState.IsValid)
             {
@@ -22,7 +22,7 @@ namespace Web.Areas.Admin.Controllers
                 if (result.Succeed)
                 {
                     foreach (var message in result.Messages) Notyf.Success(message);
-                    return RedirectToAction(nameof(Login));
+                    return RedirectToAction(nameof(Create));
                 }
                 foreach (var message in result.Messages) Notyf.Error(message);
             }
@@ -34,6 +34,23 @@ namespace Web.Areas.Admin.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginCommand command)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await Mediator.Send(command);
+                if (result.Succeed)
+                {
+                    foreach (var message in result.Messages) Notyf.Success(message);
+                    return RedirectToAction(nameof(Create));
+                }
+                foreach (var message in result.Messages) Notyf.Error(message);
+            }
+            return View(command);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Application.MediatR.Accounts.Commands.Register;
+﻿using Application.MediatR.Admins.Accounts.Commands;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

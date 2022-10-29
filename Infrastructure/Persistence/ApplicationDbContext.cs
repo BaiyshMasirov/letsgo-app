@@ -2,6 +2,7 @@
 using Domain.Common;
 using Domain.Entities;
 using Domain.Identity;
+using Infrastructure.Persistence.Seeds;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -107,12 +108,15 @@ namespace Infrastructure.Persistence
                     _currentTransaction = null;
                 }
             }
-        } 
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(builder);
+
+            builder.AddApplicationUserSeedData();
         }
     }
 }

@@ -1,17 +1,16 @@
 ﻿@model LoginCommand
 
+@{
+    Layout = "_LayoutSign";
+    ViewData["Title"] = "Вход";
+}
+
 <div class="row my-5">
     <div class="col-12">
         <div class="mb-3 d-flex">
             <div class="auth_sign">
-                <a class="sign active" asp-area="" asp-controller="Account" asp-action="Login">Вход</a>
-            </div>
-            <div class="auth_registr">
-                <a class="sign_1" asp-area="" asp-controller="Account" asp-action="Create">Регистрация</a>
-            </div>
-            <div class="auth_registr">
-                <a class="sign_1" asp-area="" asp-controller="Account" asp-action="CheckUserStatus">Проверка статуса</a>
-            </div>
+                <a class="sign active text-center" asp-area="Admin" asp-controller="Account" asp-action="Login">Вход</a>
+            </div> 
         </div>
     </div>
     <div class="col-12 col-lg-8 col-md-12 col-xs-12 col-sm-12">
