@@ -30,8 +30,8 @@ namespace Infrastructure
             .AddEntityFrameworkStores<ApplicationEFContext>()
             .AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>()
             .AddDefaultTokenProviders();
+            services.AddMemoryCache();
 
-         
             services.AddScoped<IApplicationDapperContext, ApplicationDapperContext>();
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddTransient<IRtTokenService, RtTokenService>();

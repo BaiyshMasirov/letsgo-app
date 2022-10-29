@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationEFContext))]
-    [Migration("20221029115305_initial")]
+    [Migration("20221029144044_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -231,6 +231,15 @@ namespace Infrastructure.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("eef47149-d7d1-4296-ae0e-3ff6421598ec"),
+                            ConcurrencyStamp = "41DB063E-C8F8-437D-917C-72C0AC4EBB90",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Identity.User", b =>
@@ -318,6 +327,31 @@ namespace Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("794a3441-6cda-47a2-b194-7422cf5a9467"),
+                            AccessFailedCount = 0,
+                            AvatarPath = "none",
+                            ConcurrencyStamp = "c94b51e5-52f3-4a06-a91b-f22a1588f9a4",
+                            Email = "admin@mail.test",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            IsAdmin = false,
+                            LastName = "Adminov",
+                            LockoutEnabled = false,
+                            MiddleName = "Adminovich",
+                            NormalizedEmail = "ADMIN@MAIL.TEST",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDoYf/sl6BlSTJncWdeb7ITB4YQWirQee5Ce7IaInDGaN3pJNpeVX7Hu4X1PsBeZ/Q==",
+                            PhoneNumber = "0556646400",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "0382afaf-aeae-47ef-983d-c194ba94c64e",
+                            Status = 1,
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -402,6 +436,13 @@ namespace Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("794a3441-6cda-47a2-b194-7422cf5a9467"),
+                            RoleId = new Guid("eef47149-d7d1-4296-ae0e-3ff6421598ec")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>

@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+}
+
+@{
+    ViewData["Title"] = "Главная страница";
+}
+
+<div class="main-content-wrap sidenav-open d-flex flex-column">
+    <div class="main-content">
+        <div class="breadcrumb">
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li>@ViewData["Title"]</li>
+            </ul>
+        </div>
+        <div class="separator-breadcrumb border-top"></div>
+        <div class="row mb-4">
+            @await Component.InvokeAsync("AdminsCount")
+            @await Component.InvokeAsync("UsersCount")
+        </div>
+    </div>
+</div>

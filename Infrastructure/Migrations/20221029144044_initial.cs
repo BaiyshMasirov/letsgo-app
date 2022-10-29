@@ -29,12 +29,12 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    AvatarPath = table.Column<string>(type: "text", nullable: false),
+                    AvatarPath = table.Column<string>(type: "text", nullable: true),
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
-                    MiddleName = table.Column<string>(type: "text", nullable: false),
-                    IsAdmin = table.Column<bool>(type: "boolean", nullable: false),
-                    Status = table.Column<int>(type: "integer", nullable: false),
+                    MiddleName = table.Column<string>(type: "text", nullable: true),
+                    IsAdmin = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    Status = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -262,6 +262,21 @@ namespace Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { new Guid("eef47149-d7d1-4296-ae0e-3ff6421598ec"), "41DB063E-C8F8-437D-917C-72C0AC4EBB90", "SuperAdmin", "SUPERADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "AvatarPath", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsAdmin", "LastName", "LockoutEnabled", "LockoutEnd", "MiddleName", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("794a3441-6cda-47a2-b194-7422cf5a9467"), 0, "none", "c94b51e5-52f3-4a06-a91b-f22a1588f9a4", "admin@mail.test", false, "Admin", false, "Adminov", false, null, "Adminovich", "ADMIN@MAIL.TEST", "ADMIN", "AQAAAAEAACcQAAAAEDoYf/sl6BlSTJncWdeb7ITB4YQWirQee5Ce7IaInDGaN3pJNpeVX7Hu4X1PsBeZ/Q==", "0556646400", false, "0382afaf-aeae-47ef-983d-c194ba94c64e", 1, false, "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { new Guid("eef47149-d7d1-4296-ae0e-3ff6421598ec"), new Guid("794a3441-6cda-47a2-b194-7422cf5a9467") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -32,12 +32,16 @@ namespace Application.MediatR.Admins.Accounts.Commands
         {
             try
             {
-                var user = await _userManager.FindByNameAsync(request.Email);
+                var user = await _userManager.FindByEmailAsync(request.Email);
 
                 if (user == null)
                     return Result.Failure("Пользователь по данному идентификатору не найден");
 
-                var result = await _signInManager.PasswordSignInAsync(request.Email, request.Password, request.RememberMe, false);
+                var res = await  _signInManager.CanSignInAsync(user);
+
+                 
+
+                var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, false);
 
                 return result.Succeeded
                     ? Result.Success("Вы успешно вошли в систему")

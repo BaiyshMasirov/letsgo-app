@@ -10,7 +10,7 @@ namespace Web.Areas.Admin.Controllers
     {
         public async Task<IActionResult> Index(GetAdminsQuery query)
         {
-            ViewData["Users"] = await Mediator.Send(query);
+            ViewData["Admins"] = await Mediator.Send(query);
             return View(query);
         }
     }

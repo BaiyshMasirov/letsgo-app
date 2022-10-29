@@ -16,7 +16,6 @@ namespace Application.MediatR.Admins.Accounts.Commands
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public string PhoneNumber { get; set; }
-        public bool IsAdmin { get; set; }
     }
 
     public class RegisterCommandHandler : IRequestHandler<CreateAdminCommand, Result>
@@ -50,7 +49,7 @@ namespace Application.MediatR.Admins.Accounts.Commands
                     MiddleName = request.MiddleName,
                     PhoneNumber = request.PhoneNumber,
                     Email = request.Email,
-                    IsAdmin = request.IsAdmin
+                    IsAdmin = true
                 };
 
                 IdentityResult result = await _userManager.CreateAsync(user, request.Password);

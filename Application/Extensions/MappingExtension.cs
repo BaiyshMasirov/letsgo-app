@@ -8,7 +8,7 @@ namespace Application.Extensions
         public static AdminDto AsDto(this User user)
         {
             return new AdminDto(
-               user.Id, user.Email, user.FirstName, user.LastName, user.MiddleName, user.PhoneNumber, user.LockoutEnabled
+               user.Id, user.Email, user.FirstName, user.LastName, user.MiddleName, user.PhoneNumber, user.LockoutEnabled, user.Status
             );
         }
     }

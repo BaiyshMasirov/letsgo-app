@@ -29,7 +29,7 @@
                                     <input class="form-control" asp-for="@Model.Email">
                                 </div>
                                 <div class="col-md-3 form-group">
-                                    <label>Почта</label>
+                                    <label>Номер телефона</label>
                                     <input class="form-control" asp-for="@Model.PhoneNumber">
                                 </div>
                                 <div class="col-md-3 form-group">
@@ -57,7 +57,10 @@
                 <div class="card text-left">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <h4 class="card-title mb-3">@ViewData["Title"]</h4>
+                            <h4 class="card-title mb-3">@ViewData["Title"] (Кол-во администраторов: @users.TotalItemCount)</h4>
+                            <a href="@Url.ActionLink("Create", "Account")" class="btn btn-lg btn-primary" type="button">
+                                <i class="i-Add-User mr-2"></i>Добавить
+                            </a>
                             @if (users.Any())
                             {
                                 <table class="footable table toggle-arrow-tiny mt-4 table-hover" data-page-size="@users.TotalPageCount" data-striping="false">
@@ -65,9 +68,8 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Статус</th>
-                                            <th>ФИО сотрудника</th>
-                                            <th>ИНН</th>
-                                            <th>Код района</th>
+                                            <th>ФИО сотрудника</th> 
+                                            <th>Номер телефона</th>
                                             <th>Логин</th>
                                             <th class="text-white"></th>
                                         </tr>

@@ -342,7 +342,7 @@ namespace Infrastructure.Migrations
                             MiddleName = "Adminovich",
                             NormalizedEmail = "ADMIN@MAIL.TEST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAECrQlU6iHvBiY61mmWiiB/4mHK0BUVhK/cAGyASJkNYKELzwy5Tb2W3tMHdXed1HAA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDoYf/sl6BlSTJncWdeb7ITB4YQWirQee5Ce7IaInDGaN3pJNpeVX7Hu4X1PsBeZ/Q==",
                             PhoneNumber = "0556646400",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "0382afaf-aeae-47ef-983d-c194ba94c64e",

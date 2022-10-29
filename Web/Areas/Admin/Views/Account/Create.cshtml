@@ -4,37 +4,95 @@
     ViewData["Title"] = "Регистрация";
 }
 
-<div class="entry-form">
-    <h1 class="text-center">Регистрация</h1>
-    <form id="addAdmin-form" asp-controller="Account" asp-action="Register" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Email" class="control-label">Электронная почта</label>
-            <input asp-for="Email" class="form-control input-field" />
-            <span asp-validation-for="Email" class="text-danger"></span>
+<div class="main-content-wrap sidenav-open d-flex flex-column ">
+    <div class="main-content">
+        <div class="breadcrumb">
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li>@ViewData["Title"]</li>
+            </ul>
         </div>
-        <div class="form-group">
-            <label asp-for="FirstName" class="control-label"> </label>
-            <input asp-for="FirstName" class="form-control input-field" />
-            <span asp-validation-for="FirstName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="LastName" class="control-label"> </label>
-            <input asp-for="LastName" class="form-control input-field" />
-            <span asp-validation-for="LastName" class="text-danger"></span>
-        </div>
-         <div class="form-group">
-            <label asp-for="MiddleName" class="control-label"> </label>
-            <input asp-for="MiddleName" class="form-control input-field" />
-            <span asp-validation-for="MiddleName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="PhoneNumber">Номер телефона</label>
-            <input asp-for="PhoneNumber" class="form-control input-field" />
-            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        <div class="separator-breadcrumb border-top"></div>
+        <div class="col-md-10 mx-auto">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="card-title mb-3">Добавление администратора</div>
+                      <form asp-action="Create" asp-controller="Account" method="post" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label>Электронная почта</label>
+                                <input class="form-control" asp-for="@Model.Email">
+                                <span class="text-danger" asp-validation-for="@Model.Email"></span>
+                            </div>
+                              <div class="col-md-6 form-group mb-3">
+                                <label>Номер телефона</label>
+                                <input class="form-control" asp-for="@Model.PhoneNumber">
+                                <span class="text-danger" asp-validation-for="@Model.PhoneNumber"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label>Фамилия</label>
+                                <input class="form-control" asp-for="@Model.LastName">
+                                <span class="text-danger" asp-validation-for="@Model.LastName"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label>Имя</label>
+                                <input class="form-control" asp-for="@Model.FirstName">
+                                <span class="text-danger" asp-validation-for="@Model.FirstName"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label>Отчество</label>
+                                <input class="form-control" asp-for="@Model.MiddleName">
+                                <span class="text-danger" asp-validation-for="@Model.MiddleName"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label asp-for="@Model.Password">Пароль</label>
+                                <div class="input-group">
+                                    <input type="password" asp-for="@Model.Password" class="form-control" data-toggle="password">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-eye"></i></span>
+                                    </div>
+                                </div>
+                                <span class="text-danger" asp-validation-for="@Model.Password"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label asp-for="@Model.ConfirmPassword">Подтвердите пароль</label>
+                                <div class="input-group">
+                                    <input type="password" asp-for="@Model.ConfirmPassword" class="form-control" data-toggle="password">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-eye"></i></span>
+                                    </div>
+                                </div>
+                                <span class="text-danger" asp-validation-for="@Model.ConfirmPassword"></span>
+                            </div>
+                         </div>
+                        <div class="col-md-12 mt-3">
+                            <button type="submit" class="btn btn-primary"><i class="i-Disk mr-1 "></i>Сохранить</button>
+                            <a class="btn btn-secondary" asp-action="Index" asp-controller="Admin">Назад</a>
+                        </div>
+                      </form>
+                </div>
+            </div>
         </div> 
-        <div class="form-group text-center mb-3">
-            <input type="submit" value="Отправить" class="btn btn-primary form-control btn-submit" />
-        </div>
-    </form>
+    </div>
 </div>
+
+@section Styles{
+    <environment names="Development,Staging,Production">
+        <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+        <link href="~/lib/select2-bootstrap-theme/select2-bootstrap.css" rel="stylesheet" /> 
+    </environment>
+}
+@section Scripts
+{
+    <environment names="Development,Staging,Production">
+        <partial name="_ValidationScriptsPartial" />
+
+
+        <script src="~/js/jquery.mask.min.js"></script>
+        <script src="~/lib/select2/js/select2.full.min.js" asp-append-version="true"></script>
+        <script src="~/js/Common/searchSelectSettings.js" asp-append-version="true"></script>
+        <script src="~/js/Common/pinFormat.js" asp-append-version="true"></script>
+        <script src="~/js/Common/tinCheckService.js" asp-append-version="true"></script>
+        <script src="~/js/Common/btnSubmitHandler.js" asp-append-version="true"></script>
+    </environment>
+}
