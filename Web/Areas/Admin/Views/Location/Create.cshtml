@@ -1,0 +1,127 @@
+﻿@model CreateLocationCommand
+
+@{
+    ViewData["Title"] = "Добавление локации";
+}
+
+
+<div class="main-content-wrap sidenav-open d-flex flex-column ">
+    <div class="main-content">
+        <div class="breadcrumb">
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li>@ViewData["Title"]</li>
+            </ul>
+        </div>
+        <div class="separator-breadcrumb border-top"></div>
+        <div class="col-md-10 mx-auto">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="card-title mb-3">Добавление локации</div>
+                    <form asp-action="Create" asp-controller="Location" method="post" autocomplete="off">                     
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-6 form-group mb-3 mr-0 mw-100">
+                                    <label>Наименование</label>
+                                    <input class="form-control" asp-for="@Model.Name">
+                                    <span class="text-danger" asp-validation-for="@Model.Name"></span>
+                                </div>
+                                <div class="col-md-6 form-group mb-3 mr-0 mw-100">
+                                    <label>Адрес</label>
+                                    <input class="form-control" asp-for="@Model.Address">
+                                    <span class="text-danger" asp-validation-for="@Model.Address"></span>
+                                </div>
+                                <div class="col-md-6 form-group mb-3 mr-0 mw-100">
+                                    <label>Описание</label>
+                                    <input class="form-control" asp-for="@Model.Description">
+                                    <span class="text-danger" asp-validation-for="@Model.Description"></span>
+                                </div>
+                                <div class="col-md-6 form-group mb-3 mr-0 mw-100">
+                                    <label>Координата X</label>
+                                    <input class="form-control" id="xcordinate" asp-for="@Model.XCordinate" readonly>
+                                    <span class="text-danger" asp-validation-for="@Model.XCordinate"></span>
+                                </div>
+                                <div class="col-md-6 form-group mb-3 mr-0 mw-100">
+                                    <label>Координата X</label>
+                                    <input class="form-control" id="ycordinate" asp-for="@Model.YCordinate" readonly>
+                                    <span class="text-danger" asp-validation-for="@Model.YCordinate"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mr-0">
+                                <div class="col-12 mw-100" id="map" style="width:600px; height:400px"></div>
+                             </div>
+                        </div> 
+                        
+                        <div class="col-md-12 mt-3">
+                            <button type="submit" class="btn btn-primary"><i class="i-Disk mr-1 "></i>Сохранить</button>
+                            <a class="btn btn-secondary" asp-action="Index" asp-controller="Admin">Назад</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <environment names="Development,Staging,Production">
+        <partial name="_ValidationScriptsPartial" />
+        <script src="~/js/jquery.mask.min.js"></script>
+        <script src="~/js/bootstrap-show-password.min.js"></script>
+        <script src="~/js/Common/btnSubmitHandler.js" asp-append-version="true"></script>
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=deda7589-5daf-4e80-a661-5b4035d46247" type="text/javascript"></script>
+    </environment>
+ 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var xcordinate;
+            var ycordinate;
+            ymaps.ready(init);
+            var myMap;
+
+            function init() {
+                myMap = new ymaps.Map("map", {
+                    center: [42.8659, 74.5958], // Углич
+                    zoom: 11
+                }, {
+                    balloonMaxWidth: 200,
+                    searchControlProvider: 'yandex#search'
+                });
+
+
+ 
+                myMap.events.add('click', function (e) {
+                    if (!myMap.balloon.isOpen()) {
+                        var coords = e.get('coords');
+                        xcordinate = coords[0].toPrecision(6);
+                        ycordinate = coords[1].toPrecision(6);
+                        myMap.balloon.open(coords, {
+                            contentHeader: 'Событие!',
+                            contentBody: '<p>Кто-то щелкнул по карте.</p>' +
+                                '<p>Координаты щелчка: ' + [
+                                    coords[0].toPrecision(6),
+                                    coords[1].toPrecision(6)
+                                ].join(', ') + '</p>',
+                            contentFooter: '<sup>Щелкните еще раз</sup>'
+                        });
+                        $('#xcordinate').val(xcordinate);
+                        $('#ycordinate').val(ycordinate); 
+                    }
+                    else {
+                        myMap.balloon.close();
+                    }
+                });
+
+                myMap.events.add('contextmenu', function (e) {
+                    myMap.hint.open(e.get('coords'), 'Кто-то щелкнул правой кнопкой');
+                });
+
+                // Скрываем хинт при открытии балуна.
+                myMap.events.add('balloonopen', function (e) {
+                    myMap.hint.close();
+                });
+                }
+        });    
+ 
+    </script>
+}

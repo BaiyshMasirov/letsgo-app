@@ -23,9 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MediatR\Accounts\Commands\CreatePermission\" />
     <Folder Include="MediatR\Accounts\Queries\" />
-    <Folder Include="MediatR\Admins\Locations\Commands\" />
   </ItemGroup>
 
 </Project>
