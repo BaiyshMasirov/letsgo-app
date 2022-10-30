@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Enums;
 
 namespace Domain.Entities
 {
@@ -6,9 +7,10 @@ namespace Domain.Entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ImagePath { get; set; }
+        public string? ImagePath { get; set; }
         public string Address { get; set; }
         public double XCordinate { get; set; }
         public double YCordinate { get; set; }
+        public LocationStatus Status { get; set; }
     }
 }

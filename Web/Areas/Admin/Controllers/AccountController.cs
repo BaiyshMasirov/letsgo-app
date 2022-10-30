@@ -52,5 +52,33 @@ namespace Web.Areas.Admin.Controllers
             }
             return View(command);
         }
+
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordCommand command)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await Mediator.Send(command);
+                if (result.Succeed)
+                {
+                    foreach (var message in result.Messages) Notyf.Success(message);
+                    return RedirectToAction("Index", "Home");
+                }
+                foreach (var message in result.Messages) Notyf.Error(message);
+            }
+            return View(command);
+        }
+
+
+        public async Task<IActionResult> Logout()
+        {
+            await Mediator.Send(new LogoutCommand());
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

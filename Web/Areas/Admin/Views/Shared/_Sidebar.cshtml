@@ -13,6 +13,12 @@
                 </a>
                 <div class="triangle"></div>
             </li>
+            <li class="nav-item @Html.IsSelected(controller: "Location")">
+                <a class="nav-item-hold" asp-controller="Location" asp-action="Index">
+                    <i class="nav-icon i-Shop"></i><span class="nav-text">Локации</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
         </ul>
     </div>
 </div>

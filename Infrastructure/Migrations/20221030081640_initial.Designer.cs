@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationEFContext))]
-    [Migration("20221030065135_initial")]
+    [Migration("20221030081640_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,7 +114,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ImagePath")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("Modified")
@@ -126,6 +125,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
 
                     b.Property<double>("XCordinate")
                         .HasColumnType("double precision");
@@ -341,7 +343,7 @@ namespace Infrastructure.Migrations
                             MiddleName = "Adminovich",
                             NormalizedEmail = "ADMIN@MAIL.TEST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO7iTE5gcCoeftHzojwYKKYc+DuJGGkmGpovoo8TDlYN9l7kwfyT1z2VkX8c+wzfrQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGLCQS+gZ7np8JHDDABfol0QflTr0WRBcNLgo7OG83yj+CWk3sBSCoBx3x6blM3Iyg==",
                             PhoneNumber = "0556646400",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "0382afaf-aeae-47ef-983d-c194ba94c64e",

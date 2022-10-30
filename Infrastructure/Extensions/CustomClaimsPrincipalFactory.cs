@@ -1,4 +1,5 @@
-﻿using Domain.Identity;
+﻿using Application.Constants;
+using Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
@@ -17,9 +18,9 @@ namespace Infrastructure.Extensions
         protected override async Task<ClaimsIdentity> GenerateClaimsAsync(User user)
         {
             var identity = await base.GenerateClaimsAsync(user);
-            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
-            identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
-            identity.AddClaim(new Claim(ClaimTypes.MobilePhone, user.PhoneNumber));
+            identity.AddClaim(new Claim(CustomClaimTypes.UserId, user.Id.ToString()));
+            identity.AddClaim(new Claim(CustomClaimTypes.FullName, user.FullName));
+            identity.AddClaim(new Claim(CustomClaimTypes.Email, user.Email)); 
             return identity;
         }
     }

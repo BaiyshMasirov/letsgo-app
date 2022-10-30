@@ -1,11 +1,11 @@
-﻿@model GetAdminsQuery
+﻿@model GetLocationsQuery
 
 @{
-    ViewData["Title"] = "Список администраторов";
+    ViewData["Title"] = "Список локаций";
 
-    var users = (IPager<AdminDto>)ViewData["Admins"];
+    var locations = (IPager<LocationDto>)ViewData["Locations"];
 
-    int i = users.StartItemIndex;
+    int i = locations.StartItemIndex;
 }
 
 <div class="main-content-wrap sidenav-open d-flex flex-column">
@@ -23,18 +23,14 @@
                     <div class="card-body">
                         <div class="card-title mb-3">Поиск</div>
                         <form asp-action="Index" method="get" autocomplete="off">
-                            <div class="row"> 
+                            <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Почта</label>
-                                    <input class="form-control" asp-for="@Model.Email">
-                                </div>
-                                <div class="col-md-3 form-group">
-                                    <label>Номер телефона</label>
-                                    <input class="form-control" asp-for="@Model.PhoneNumber">
-                                </div>
-                                <div class="col-md-3 form-group">
-                                    <label>ФИО</label>
+                                    <label>Наименование</label>
                                     <input class="form-control" asp-for="@Model.Name">
+                                </div> 
+                                <div class="col-md-3 form-group">
+                                    <label>Адрес</label>
+                                    <input class="form-control" asp-for="@Model.Address">
                                 </div>
                             </div>
                             <div class="row">
@@ -57,54 +53,50 @@
                 <div class="card text-left">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <h4 class="card-title mb-3">@ViewData["Title"] (Кол-во администраторов: @users.TotalItemCount)</h4>
-                            <a href="@Url.ActionLink("Create", "Account")" class="btn btn-lg btn-primary" type="button">
+                            <h4 class="card-title mb-3">@ViewData["Title"] (Кол-во локаций: @locations.TotalItemCount)</h4>
+                            <a href="@Url.ActionLink("Create", "Location")" class="btn btn-lg btn-primary" type="button">
                                 <i class="i-Add-User mr-2"></i>Добавить
                             </a>
-                            @if (users.Any())
+                            @if (locations.Any())
                             {
-                                <table class="footable table toggle-arrow-tiny mt-4 table-hover" data-page-size="@users.TotalPageCount" data-striping="false">
+                                <table class="footable table toggle-arrow-tiny mt-4 table-hover" data-page-size="@locations.TotalPageCount" data-striping="false">
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Статус</th>
-                                            <th>ФИО сотрудника</th> 
-                                            <th>Номер телефона</th>
-                                            <th>Логин</th>
+                                            <th>Наименование</th>
+                                            <th>Описание</th>
+                                            <th>Адрес</th>
+                                            <th>Дата создания</th>
                                             <th class="text-white"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var user in users)
+                                        @foreach (var location in locations)
                                         {
                                             <tr>
                                                 <td>@(i++)</td>
-                                                <td>
-                                                    <user-status user="@user"></user-status>
-                                                </td>
-                                                <td>@user.FullName</td>
-                                                <td>@user.PhoneNumber</td>
-                                                <td>@user.Email</td>                                                 
+                                                <td>@location.Status.GetDisplayValue()</td>
+                                                <td>@location.Name</td>
+                                                <td>@location.Description</td>
+                                                <td>@location.Address</td>
+                                                <td>@location.Created</td>
                                                 <td class="text-right">
-                                                   <a asp-action="UserLock" asp-route-id="@user.Id" 
-                                                      class="btn btn-white btn-circle" title="Заблокировать пользователя">
-                                                      <i class="i-Lock-2 text-25 text-secondary mr-1"></i>
-                                                   </a>
+                                                  
                                                 </td>
                                             </tr>
                                         }
                                     </tbody>
                                 </table>
-                                @Html.Pager(users, page => Url.Action("Index", new
+                                @Html.Pager(locations, page => Url.Action("Index", new
                             {
-                            page, 
-                            Email = Model.Email,
-                            PhoneNumber = Model.PhoneNumber,
-                            Name = Model.Name 
+                            page,
+                            Name = Model.Name,
+                            Address = Model.Address, 
                             }),
                             new PagerOptions
                             {
-                            PagesToDisplay = 10,
+                            PagesToDisplay = 20,
                             ClassToPagerContainer = "d-flex justify-content-center"
                             })
                             }

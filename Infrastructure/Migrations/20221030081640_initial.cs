@@ -62,10 +62,11 @@ namespace Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    ImagePath = table.Column<string>(type: "text", nullable: false),
+                    ImagePath = table.Column<string>(type: "text", nullable: true),
                     Address = table.Column<string>(type: "text", nullable: false),
                     XCordinate = table.Column<double>(type: "double precision", nullable: false),
                     YCordinate = table.Column<double>(type: "double precision", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -271,7 +272,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "AvatarPath", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsAdmin", "LastName", "LockoutEnabled", "LockoutEnd", "MiddleName", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("794a3441-6cda-47a2-b194-7422cf5a9467"), 0, null, "c94b51e5-52f3-4a06-a91b-f22a1588f9a4", "admin@mail.test", false, "Admin", true, "Adminov", false, null, "Adminovich", "ADMIN@MAIL.TEST", "ADMIN", "AQAAAAEAACcQAAAAEO7iTE5gcCoeftHzojwYKKYc+DuJGGkmGpovoo8TDlYN9l7kwfyT1z2VkX8c+wzfrQ==", "0556646400", false, "0382afaf-aeae-47ef-983d-c194ba94c64e", 1, false, "Admin" });
+                values: new object[] { new Guid("794a3441-6cda-47a2-b194-7422cf5a9467"), 0, null, "c94b51e5-52f3-4a06-a91b-f22a1588f9a4", "admin@mail.test", false, "Admin", true, "Adminov", false, null, "Adminovich", "ADMIN@MAIL.TEST", "ADMIN", "AQAAAAEAACcQAAAAEGLCQS+gZ7np8JHDDABfol0QflTr0WRBcNLgo7OG83yj+CWk3sBSCoBx3x6blM3Iyg==", "0556646400", false, "0382afaf-aeae-47ef-983d-c194ba94c64e", 1, false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
