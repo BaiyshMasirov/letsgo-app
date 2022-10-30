@@ -21,7 +21,7 @@ namespace Application.MediatR.Admins.Accounts.Queries.GetAdmins
 
         public async Task<IPager<AdminDto>> Handle(GetAdminsQuery request, CancellationToken cancellationToken)
         {
-            var query = _userManager.Users.Where(x => x.UserName != "Admin").AsNoTracking();
+            var query = _userManager.Users.Where(x => x.IsAdmin).AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(request.Email))
             {

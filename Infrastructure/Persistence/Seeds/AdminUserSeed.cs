@@ -24,8 +24,8 @@ namespace Infrastructure.Persistence.Seeds
                     SecurityStamp = "0382afaf-aeae-47ef-983d-c194ba94c64e",
                     ConcurrencyStamp = "c94b51e5-52f3-4a06-a91b-f22a1588f9a4",
                     PhoneNumber = "0556646400",
-                    Status = UserStatus.Active,
-                    AvatarPath = "none"
+                    Status = UserStatus.Active, 
+                    IsAdmin = true,
                 };
 
             user.PasswordHash = new PasswordHasher<User>().HashPassword(user, "12345678");

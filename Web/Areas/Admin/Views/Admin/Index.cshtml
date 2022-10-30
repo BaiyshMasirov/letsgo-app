@@ -86,50 +86,10 @@
                                                 <td>@user.Email</td>
                                                 <td>@user.PhoneNumber</td> 
                                                 <td class="text-right">
-                                                  @*  @if (AuthorizationService.AuthorizeAsync(User, AdminPermissions.UserAction).Result.Succeeded)
-                                                    {
-                                                        @if (user.Status == UserStatus.InProcess)
-                                                        {
-                                                            <a asp-action="UserConfirm" asp-route-id="@user.Id"
-                                               class="btn btn-white btn-circle" title="Подтвердить пользователя">
-                                                                <i class="i-Security-Check text-25 text-secondary mr-1"></i>
-                                                            </a>
-                                                        }
-                                                        else
-                                                        {
-                                                            if (user.LockoutEnabled)
-                                                            {
-                                                                <a asp-action="UserUnLock" asp-route-id="@user.Id"
-                                               class="btn btn-white btn-circle" title="Разблокировать пользователя">
-                                                                    <i class="i-Unlock-2 text-25 text-secondary mr-1"></i>
-                                                                </a>
-                                                            }
-                                                            else
-                                                            {
-                                                                <a asp-action="UserRayons" asp-route-id="@user.Id"
-                                               class="btn btn-white btn-circle" title="Менеджер районов">
-                                                                    <i class="i-University1 text-25 text-secondary mr-1"></i>
-                                                                </a>
-
-                                                                <a asp-action="UserPermissions" asp-route-id="@user.Id"
-                                               class="btn btn-white btn-circle" title="Менеджер прав доступа">
-                                                                    <i class="i-Management text-25 text-secondary mr-1"></i>
-                                                                </a>
-
-                                                                <a asp-action="UserLock" asp-route-id="@user.Id"
-                                               class="btn btn-white btn-circle" title="Заблокировать пользователя">
-                                                                    <i class="i-Lock-2 text-25 text-secondary mr-1"></i>
-                                                                </a>
-                                                                if (user.IsResetPassword)
-                                                                {
-                                                                    <a asp-action="ResetPassword" asp-route-id="@user.Id"
-                                               class="btn btn-white btn-circle" title="Восстановление пароля">
-                                                                        <i class="i-Password-shopping text-25 text-secondary mr-1"></i>
-                                                                    </a>
-                                                                }
-                                                            }
-                                                        }
-                                                    }*@
+                                                   <a asp-action="UserLock" asp-route-id="@user.Id" 
+                                                      class="btn btn-white btn-circle" title="Заблокировать пользователя">
+                                                      <i class="i-Lock-2 text-25 text-secondary mr-1"></i>
+                                                   </a>
                                                 </td>
                                             </tr>
                                         }

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationEFContext))]
-    [Migration("20221029144044_initial")]
+    [Migration("20221030065135_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -252,7 +252,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("AvatarPath")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -284,7 +283,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("MiddleName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("NormalizedEmail")
@@ -333,18 +331,17 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("794a3441-6cda-47a2-b194-7422cf5a9467"),
                             AccessFailedCount = 0,
-                            AvatarPath = "none",
                             ConcurrencyStamp = "c94b51e5-52f3-4a06-a91b-f22a1588f9a4",
                             Email = "admin@mail.test",
                             EmailConfirmed = false,
                             FirstName = "Admin",
-                            IsAdmin = false,
+                            IsAdmin = true,
                             LastName = "Adminov",
                             LockoutEnabled = false,
                             MiddleName = "Adminovich",
                             NormalizedEmail = "ADMIN@MAIL.TEST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDoYf/sl6BlSTJncWdeb7ITB4YQWirQee5Ce7IaInDGaN3pJNpeVX7Hu4X1PsBeZ/Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO7iTE5gcCoeftHzojwYKKYc+DuJGGkmGpovoo8TDlYN9l7kwfyT1z2VkX8c+wzfrQ==",
                             PhoneNumber = "0556646400",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "0382afaf-aeae-47ef-983d-c194ba94c64e",
