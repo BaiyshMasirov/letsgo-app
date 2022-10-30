@@ -35,11 +35,7 @@ namespace Application.MediatR.Admins.Accounts.Commands
                 var user = await _userManager.FindByEmailAsync(request.Email);
 
                 if (user == null)
-                    return Result.Failure("Пользователь по данному идентификатору не найден");
-
-                var res = await  _signInManager.CanSignInAsync(user);
-
-                 
+                    return Result.Failure("Пользователь по данному идентификатору не найден");                  
 
                 var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, false);
 

@@ -76,23 +76,13 @@
     </div>
 </div>
 
-@section Styles{
-    <environment names="Development,Staging,Production">
-        <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
-        <link href="~/lib/select2-bootstrap-theme/select2-bootstrap.css" rel="stylesheet" /> 
-    </environment>
-}
+ 
 @section Scripts
 {
     <environment names="Development,Staging,Production">
         <partial name="_ValidationScriptsPartial" />
-
-
         <script src="~/js/jquery.mask.min.js"></script>
-        <script src="~/lib/select2/js/select2.full.min.js" asp-append-version="true"></script>
-        <script src="~/js/Common/searchSelectSettings.js" asp-append-version="true"></script>
-        <script src="~/js/Common/pinFormat.js" asp-append-version="true"></script>
-        <script src="~/js/Common/tinCheckService.js" asp-append-version="true"></script>
+        <script src="~/js/bootstrap-show-password.min.js"></script> 
         <script src="~/js/Common/btnSubmitHandler.js" asp-append-version="true"></script>
     </environment>
 }

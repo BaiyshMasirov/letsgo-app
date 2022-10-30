@@ -46,23 +46,25 @@
         </div>
     </div> 
 </div>
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/jquery.mask.min.js"></script>
+    <style>
+        .input-validation-error {
+            border: 1px solid red;
+        }
+    </style>
+    <script>
+        var settings = {
+            validClass: "is-valid",
+            errorClass: "is-invalid"
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-<script src="~/js/jquery.mask.min.js"></script>
-<style>
-    .input-validation-error {
-        border: 1px solid red;
-    }
-</style>
-<script>
-    var settings = {
-        validClass: "is-valid",
-        errorClass: "is-invalid"
+        };
+        $.validator.setDefaults(settings);
+        $.validator.unobtrusive.options = settings;
+    </script>
+}
 
-    };
-    $.validator.setDefaults(settings);
-    $.validator.unobtrusive.options = settings;
-</script>
 @await Component.InvokeAsync("Notyf")

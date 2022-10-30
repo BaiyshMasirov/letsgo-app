@@ -22,7 +22,7 @@ namespace Web.Areas.Admin.Controllers
                 if (result.Succeed)
                 {
                     foreach (var message in result.Messages) Notyf.Success(message);
-                    return RedirectToAction(nameof(Create));
+                    return RedirectToAction("Index", "Admin");
                 }
                 foreach (var message in result.Messages) Notyf.Error(message);
             }

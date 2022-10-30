@@ -1,4 +1,5 @@
 ﻿using Application.Models;
+using Domain.Enums;
 using Domain.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -23,13 +24,13 @@ namespace Application.MediatR.Admins.Accounts.Commands
         {
             try
             {
-                var applicationUser = await _userManager.FindByIdAsync(request.Id.ToString());
-                if (applicationUser != null)
+                var admin = await _userManager.FindByIdAsync(request.Id.ToString());
+                if (admin != null)
                 {
-                    applicationUser.LockoutEnabled = true;
-                    applicationUser.LockoutEnd = DateTime.MaxValue;
-
-                    var identityResult = await _userManager.UpdateAsync(applicationUser);
+                    admin.LockoutEnabled = true;
+                    admin.LockoutEnd = DateTimeOffset.MaxValue;
+                    admin.Status = UserStatus.Blocked;
+                    var identityResult = await _userManager.UpdateAsync(admin);
 
                     return identityResult.Succeeded
                    ? Result.Success("Успешно заблокирован")
@@ -41,7 +42,7 @@ namespace Application.MediatR.Admins.Accounts.Commands
             catch (Exception e)
             {
                 _logger.LogError(e, $"User lockout failed with error");
-                return Result.Failure("Возникли ошибки при заблокировании пользователся");
+                return Result.Failure("Возникли ошибки при блокировке пользователся");
             }
         }
     }

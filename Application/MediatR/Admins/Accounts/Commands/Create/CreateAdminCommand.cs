@@ -1,4 +1,5 @@
 ﻿using Application.Models;
+using Domain.Enums;
 using Domain.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -49,6 +50,8 @@ namespace Application.MediatR.Admins.Accounts.Commands
                     MiddleName = request.MiddleName,
                     PhoneNumber = request.PhoneNumber,
                     Email = request.Email,
+                    LockoutEnabled = false,
+                    Status = UserStatus.Active,
                     IsAdmin = true
                 };
 
@@ -56,13 +59,7 @@ namespace Application.MediatR.Admins.Accounts.Commands
 
                 return result.Succeeded
                     ? Result.Success("Успешно зарегистрирован")
-                    : Result.Failure(result.Errors.Select(x => x.Description).ToList());
-
-                /* string rToken = await _rtTokenService.GenerateRToken(user.Id);
-                 if (string.IsNullOrWhiteSpace(rToken))
-                     return Result.Failure("Не удалось сформировать токен");
-
-                 var token = _rtTokenService.GenerateJwtToken(user);*/
+                    : Result.Failure(result.Errors.Select(x => x.Description).ToList()); 
             }
             catch (Exception ex)
             {
