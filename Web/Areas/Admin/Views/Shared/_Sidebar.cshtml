@@ -19,6 +19,12 @@
                 </a>
                 <div class="triangle"></div>
             </li>
+            <li class="nav-item @Html.IsSelected(controller: "Event")">
+                <a class="nav-item-hold" asp-controller="Event" asp-action="Index">
+                    <i class="nav-icon i-Ticket"></i><span class="nav-text">События</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
         </ul>
     </div>
 </div>

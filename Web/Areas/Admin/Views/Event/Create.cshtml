@@ -1,0 +1,200 @@
+﻿@model CreateEventCommand
+
+@{
+    ViewData["Title"] = "Добавление события";
+    var locations = (SelectList)ViewData["Locations"];
+}
+
+<div class="main-content-wrap sidenav-open d-flex flex-column ">
+    <div class="main-content">
+        <div class="breadcrumb">
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li>@ViewData["Title"]</li>
+            </ul>
+        </div>
+        <div class="separator-breadcrumb border-top"></div>
+        <div class="col-md-10 mx-auto">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="card-title mb-3">Добавление События</div>
+                    <form asp-action="Create" asp-controller="Event" method="post" autocomplete="off" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label>Наименование</label>
+                                <input class="form-control" asp-for="@Model.Name">
+                                <span class="text-danger" asp-validation-for="@Model.Name"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label>Описание</label>
+                                <input class="form-control" asp-for="@Model.Description">
+                                <span class="text-danger" asp-validation-for="@Model.Description"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label>Локация</label>
+                                <select class="search-select form-control" asp-for="@Model.LocationId" asp-items="@locations">
+                                    <option value="@null">Выберите локацию</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label>Ограничение по возрасту</label>
+                                <input class="form-control" asp-for="@Model.AgeLimit">
+                                <span class="text-danger" asp-validation-for="@Model.AgeLimit"></span>
+                            </div>
+                            <div class="col-md-6 d-flex my-3 align-items-center pr-0">
+                                <div class="col-md-4 pt-2 pl-0">
+                                    <label class="text-16">Период проведения</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control controlDate" type="date" asp-for="StartDate" placeholder="Выберите дату" asp-format="{0:dd-MM-yyyy}" />
+                                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control controlDate" type="date" asp-for="EndDate" placeholder="Выберите дату" asp-format="{0:dd-MM-yyyy}" />
+                                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                                </div>                             
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label>Минимальная цена</label>
+                                <input class="form-control" asp-for="@Model.MinPrice">
+                                <span class="text-danger" asp-validation-for="@Model.MinPrice"></span>
+                            </div>
+                            <div class="col-md-12 form-group my-3">
+                                <label>Постер</label>
+                                <input asp-for="@Model.Poster" class="btn-primary" type="file" id="formFile">
+                                <span asp-validation-for="@Model.Poster" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label>Вид рассадки</label>
+                                <select  id="location-type"  class="custom-select">
+                                    <option value="0">Филармония</option>
+                                    <option value="1">Дворец спорта</option>
+                                    <option value="2">Бишкек Арена</option>
+                                    <option value="3">Прочее</option>
+                                </select> 
+                            </div>
+                            <div class="col-md-12 form-group ml-3">
+                                <div class="row">
+                                    <div class="my-1">Ряд 1</div>
+                                    <div class="place my-1" data-row="1" data-place my-3="1">1</div>
+                                    <div class="place my-1" data-row="1" data-place my-3="2">2</div>
+                                    <div class="place my-1" data-row="1" data-place my-3="3">3</div>
+                                    <div class="place my-1" data-row="1" data-place my-3="4">4</div>
+                                    <div class="place my-1" data-row="1" data-place my-3="5">5</div>
+                                    <div class="place my-1" data-row="1" data-place my-3="6">6</div>
+                                    <div class="place my-1" data-row="1" data-place my-3="7">7</div>
+                                </div>
+                                <div class="row">
+                                    <div class="my-1">Ряд 2</div>
+                                    <div class="place my-1" data-row="2" data-place my-3="1">1</div>
+                                    <div class="place my-1" data-row="2" data-place my-3="2">2</div>
+                                    <div class="place my-1" data-row="2" data-place my-3="3">3</div>
+                                    <div class="place my-1" data-row="2" data-place my-3="4">4</div>
+                                    <div class="place my-1" data-row="2" data-place my-3="5">5</div>
+                                    <div class="place my-1" data-row="2" data-place my-3="6">6</div>
+                                    <div class="place my-1" data-row="2" data-place my-3="7">7</div>
+                                </div>
+                                <div class="row">
+                                    <div class="my-1">Ряд 3</div>
+                                    <div class="place my-1" data-row="3" data-place my-3="1">1</div>
+                                    <div class="place my-1" data-row="3" data-place my-3="2">2</div>
+                                    <div class="place my-1" data-row="3" data-place my-3="3">3</div>
+                                    <div class="place my-1" data-row="3" data-place my-3="4">4</div>
+                                    <div class="place my-1" data-row="3" data-place my-3="5">5</div>
+                                    <div class="place my-1" data-row="3" data-place my-3="6">6</div>
+                                    <div class="place my-1" data-row="3" data-place my-3="7">7</div>
+                                </div>
+                                <div class="row">
+                                    <div class="my-1">Ряд 3</div>
+                                    <div class="place my-1" data-row="4" data-place my-3="1">1</div>
+                                    <div class="place my-1" data-row="4" data-place my-3="2">2</div>
+                                    <div class="place my-1" data-row="4" data-place my-3="3">3</div>
+                                    <div class="place my-1" data-row="4" data-place my-3="4">4</div>
+                                    <div class="place my-1" data-row="4" data-place my-3="5">5</div>
+                                    <div class="place my-1" data-row="4" data-place my-3="6">6</div>
+                                    <div class="place my-1" data-row="4" data-place my-3="7">7</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mt-3">
+                            <button type="submit" class="btn btn-primary"><i class="i-Disk mr-1 "></i>Сохранить</button>
+                            <a class="btn btn-secondary" asp-action="Index" asp-controller="Event">Назад</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles{
+    <environment names="Development,Staging,Production">
+        <link href="~/css/site.css" rel="stylesheet" />
+        <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+        <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+        <link href="~/lib/select2-bootstrap-theme/select2-bootstrap.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    </environment>
+}
+@section Scripts{
+    <environment names="Development,Staging,Production">
+        <partial name="_ValidationScriptsPartial" />
+        <script src="~/js/jquery.mask.min.js"></script>
+        <script src="~/js/bootstrap-show-password.min.js"></script>
+        <script src="~/js/Common/btnSubmitHandler.js" asp-append-version="true"></script>
+        <script src="~/lib/select2/js/select2.full.min.js" asp-append-version="true"></script>
+        <script src="~/lib/select2/js/i18n/ru.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <script type="text/javascript"> 
+        $(document).ready(function () {
+            $('.search-select').select2(
+                { theme: "bootstrap" }
+            );            
+        });
+
+        $(document).ready(function () {
+
+            $('.place').on('click', function () {
+                $(this).toggleClass('place-selected');
+            });
+
+            $('#submit').on('click', function () {
+                //create obj to put data in
+                var results = {
+                    name: '',
+                    phone: '',
+                    agreed: '',
+                    places: []
+                };
+                //check and collect places
+                $('.place').each(function () {
+                    if ($(this).hasClass('place-selected')) {
+                        var row = $(this).attr('data-row');
+                        var place = $(this).attr('data-place');
+                        results.places.push('Row: ' + row + ', place: ' + place);
+                    }
+                });
+
+                //collect credentials
+                results.name = $("input[name='name']").val().trim();
+                results.phone = $("input[name='phone']").val().trim();
+                results.agreed = $("input[name='agree']").prop('checked');
+
+                //display and check
+                if (results.name && results.phone && results.agreed) {
+                    $('.result').show().append(
+                        '<p>Your name: ' + results.name + '</p><p>Your phone: ' + results.phone + '</p><p>Your places:</p>');
+                    results.places.forEach(function (i) {
+                        $('.result').append('<li>' + i + '</li>');
+                    });
+                }
+                else {
+                    $('.result').show().append('<p>Enter all credentials and check that damn checkbox</p>')
+                }
+
+            });
+        });
+    </script>   
+}

@@ -4,16 +4,19 @@ namespace Domain.Enums
 {
     public enum TicketStatus
     {
+        [Display(Name = "Свободен")]
+        Free = 0,
+
         [Display(Name = "Ожидает оплату")]
-        InProccess = 0,
+        InProccess = 1,
 
         [Display(Name = "Оплачен")]
-        Payed = 1,
+        Payed = 2,
 
         [Display(Name = "Возвращен")]
-        Returned = 2,
+        Returned = 3,
 
         [Display(Name = "Использован")]
-        Used = 3
+        Used = 4
     }
 }

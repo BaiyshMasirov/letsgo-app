@@ -78,27 +78,6 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tickets",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    CustomerEmail = table.Column<string>(type: "text", nullable: false),
-                    CustomerPhone = table.Column<string>(type: "text", nullable: false),
-                    CustomerName = table.Column<string>(type: "text", nullable: false),
-                    QRCode = table.Column<string>(type: "text", nullable: false),
-                    Type = table.Column<int>(type: "integer", nullable: false),
-                    Status = table.Column<int>(type: "integer", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
-                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    Modified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tickets", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -236,12 +215,10 @@ namespace Infrastructure.Migrations
                     Status = table.Column<int>(type: "integer", nullable: false),
                     ImagePath = table.Column<string>(type: "text", nullable: false),
                     AgeLimit = table.Column<int>(type: "integer", nullable: false),
-                    TicketLimit = table.Column<int>(type: "integer", nullable: false),
-                    MinPrice = table.Column<double>(type: "double precision", nullable: false),
+                    MinPrice = table.Column<decimal>(type: "numeric", nullable: false),
                     Sold = table.Column<int>(type: "integer", nullable: false),
                     Count = table.Column<int>(type: "integer", nullable: false),
                     LocationId = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrganizerId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -251,15 +228,42 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Events_AspNetUsers_OrganizerId",
-                        column: x => x.OrganizerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Events_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tickets",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PlaceNumber = table.Column<int>(type: "integer", nullable: true),
+                    QRCode = table.Column<string>(type: "text", nullable: true),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    EventId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
+                    Modified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tickets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tickets_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Tickets_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -272,7 +276,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "AvatarPath", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsAdmin", "LastName", "LockoutEnabled", "LockoutEnd", "MiddleName", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("794a3441-6cda-47a2-b194-7422cf5a9467"), 0, null, "c94b51e5-52f3-4a06-a91b-f22a1588f9a4", "admin@mail.test", false, "Admin", true, "Adminov", false, null, "Adminovich", "ADMIN@MAIL.TEST", "ADMIN", "AQAAAAEAACcQAAAAEGLCQS+gZ7np8JHDDABfol0QflTr0WRBcNLgo7OG83yj+CWk3sBSCoBx3x6blM3Iyg==", "0556646400", false, "0382afaf-aeae-47ef-983d-c194ba94c64e", 1, false, "Admin" });
+                values: new object[] { new Guid("794a3441-6cda-47a2-b194-7422cf5a9467"), 0, null, "c94b51e5-52f3-4a06-a91b-f22a1588f9a4", "admin@mail.test", false, "Admin", true, "Adminov", false, null, "Adminovich", "ADMIN@MAIL.TEST", "ADMIN", "AQAAAAEAACcQAAAAEORwjiOQ7lEh4ccxgm4Ud59XsBFnNHMu2nix/C/msMCbFZb/6HUJVRLiv84VbFiH0Q==", "0556646400", false, "0382afaf-aeae-47ef-983d-c194ba94c64e", 1, false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -322,14 +326,19 @@ namespace Infrastructure.Migrations
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_OrganizerId",
-                table: "Events",
-                column: "OrganizerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_RTokens_UserId",
                 table: "RTokens",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_CustomerId",
+                table: "Tickets",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_EventId",
+                table: "Tickets",
+                column: "EventId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -350,9 +359,6 @@ namespace Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Events");
-
-            migrationBuilder.DropTable(
                 name: "RTokens");
 
             migrationBuilder.DropTable(
@@ -362,10 +368,13 @@ namespace Infrastructure.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Locations");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Events");
+
+            migrationBuilder.DropTable(
+                name: "Locations");
         }
     }
 }

@@ -54,8 +54,8 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("LocationId")
                         .HasColumnType("uuid");
 
-                    b.Property<double>("MinPrice")
-                        .HasColumnType("double precision");
+                    b.Property<decimal>("MinPrice")
+                        .HasColumnType("numeric");
 
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("timestamp with time zone");
@@ -67,9 +67,6 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("OrganizerId")
-                        .HasColumnType("uuid");
-
                     b.Property<int>("Sold")
                         .HasColumnType("integer");
 
@@ -79,14 +76,9 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TicketLimit")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("LocationId");
-
-                    b.HasIndex("OrganizerId");
 
                     b.ToTable("Events");
                 });
@@ -173,17 +165,11 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CustomerEmail")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid?>("CustomerId")
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("CustomerPhone")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("timestamp with time zone");
@@ -191,8 +177,13 @@ namespace Infrastructure.Migrations
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uuid");
 
+                    b.Property<int?>("PlaceNumber")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
                     b.Property<string>("QRCode")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Status")
@@ -202,6 +193,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("EventId");
 
                     b.ToTable("Tickets");
                 });
@@ -341,7 +336,7 @@ namespace Infrastructure.Migrations
                             MiddleName = "Adminovich",
                             NormalizedEmail = "ADMIN@MAIL.TEST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGLCQS+gZ7np8JHDDABfol0QflTr0WRBcNLgo7OG83yj+CWk3sBSCoBx3x6blM3Iyg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEORwjiOQ7lEh4ccxgm4Ud59XsBFnNHMu2nix/C/msMCbFZb/6HUJVRLiv84VbFiH0Q==",
                             PhoneNumber = "0556646400",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "0382afaf-aeae-47ef-983d-c194ba94c64e",
@@ -469,15 +464,7 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Identity.User", "Organizer")
-                        .WithMany()
-                        .HasForeignKey("OrganizerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Location");
-
-                    b.Navigation("Organizer");
                 });
 
             modelBuilder.Entity("Domain.Entities.RToken", b =>
@@ -489,6 +476,23 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Ticket", b =>
+                {
+                    b.HasOne("Domain.Identity.User", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+
+                    b.HasOne("Domain.Entities.Event", "Event")
+                        .WithMany("Tickets")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Event");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -540,6 +544,11 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Event", b =>
+                {
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }
