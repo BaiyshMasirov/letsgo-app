@@ -4,7 +4,7 @@
     {
         DateTime Now
         {
-            get { return DateTime.Now; }
+            get { return DateTime.UtcNow; }
         }
     }
 }
