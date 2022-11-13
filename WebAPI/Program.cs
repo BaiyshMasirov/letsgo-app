@@ -2,6 +2,7 @@ using Application;
 using Infrastructure;
 using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
+using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +12,14 @@ Log.Logger = new LoggerConfiguration()
               .CreateLogger();
 
 builder.Services.AddApplication()
-                .AddInfrastructure(builder.Configuration);
+                .AddInfrastructure(builder.Configuration)
+                .AddSwaggerConfiguration()
+                .AddJwtConfiguration(builder.Configuration);
+
 builder.Host.UseSerilog();
 
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer(); 
 
 var app = builder.Build();
 
