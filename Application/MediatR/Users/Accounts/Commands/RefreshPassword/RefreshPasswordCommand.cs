@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Application.MediatR.Accounts.Commands.RefreshPassword
+namespace Application.MediatR.Users.Accounts.Commands
 {
     public class RefreshPasswordCommand : IRequest<Result>
     {

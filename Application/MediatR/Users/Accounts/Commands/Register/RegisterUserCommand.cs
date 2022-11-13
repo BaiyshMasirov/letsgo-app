@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Application.MediatR.Admins.Accounts.Commands
+namespace Application.MediatR.Users.Accounts.Commands
 {
-    public class CreateAdminCommand : IRequest<Result>
+    public class RegisterUserCommand : IRequest<Result>
     {
         public string Email { get; set; }
         public string FirstName { get; set; }
@@ -19,28 +19,28 @@ namespace Application.MediatR.Admins.Accounts.Commands
         public string PhoneNumber { get; set; }
     }
 
-    public class CreateAdminCommandHandler : IRequestHandler<CreateAdminCommand, Result>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Result>
     {
         private readonly UserManager<User> _userManager;
-        private readonly ILogger<CreateAdminCommandHandler> _logger;
+        private readonly ILogger<RegisterUserCommandHandler> _logger;
 
-        public CreateAdminCommandHandler(UserManager<User> userManager,
-                                         ILogger<CreateAdminCommandHandler> logger)
+        public RegisterUserCommandHandler(UserManager<User> userManager,
+                                         ILogger<RegisterUserCommandHandler> logger)
         {
             _userManager = userManager;
             _logger = logger;
         }
 
-        public async Task<Result> Handle(CreateAdminCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 var existingUser = await _userManager.Users
-                    .Where(x => x.UserName == request.Email)
+                    .Where(x => x.UserName == request.Email || x.PhoneNumber == request.PhoneNumber)
                     .FirstOrDefaultAsync(cancellationToken);
 
                 if (existingUser != null)
-                    return Result.Failure("Такой пользователь уже существует");
+                    return Result.Failure("Пользователь с такой почтой или номером телефона уже сущетсвует");
 
                 User user = new()
                 {
@@ -52,7 +52,7 @@ namespace Application.MediatR.Admins.Accounts.Commands
                     Email = request.Email,
                     LockoutEnabled = false,
                     Status = UserStatus.Active,
-                    IsAdmin = true
+                    IsAdmin = false
                 };
 
                 IdentityResult result = await _userManager.CreateAsync(user, request.Password);
@@ -63,8 +63,8 @@ namespace Application.MediatR.Admins.Accounts.Commands
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Admin account create failed with error");
-                return Result.Failure("Возникли ошибки при создании администратора");
+                _logger.LogError(ex, $"User account create failed with error");
+                return Result.Failure("Возникли ошибки при регистрации");
             }
         }
     }

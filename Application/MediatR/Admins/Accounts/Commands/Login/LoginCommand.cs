@@ -32,12 +32,12 @@ namespace Application.MediatR.Admins.Accounts.Commands
         {
             try
             {
-                var user = await _userManager.FindByEmailAsync(request.Email);
+                var admin = await _userManager.FindByEmailAsync(request.Email);
 
-                if (user == null)
-                    return Result.Failure("Пользователь по данному идентификатору не найден");                  
+                if (admin == null)
+                    return Result.Failure("Пользователь по данной почте не найден");                  
 
-                var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, false);
+                var result = await _signInManager.PasswordSignInAsync(admin, request.Password, request.RememberMe, false);
 
                 return result.Succeeded
                     ? Result.Success("Вы успешно вошли в систему")
@@ -45,7 +45,7 @@ namespace Application.MediatR.Admins.Accounts.Commands
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"User login failed with error");
+                _logger.LogError(ex, $"Admin login failed with error");
                 return Result.Failure("Произошли ошибки при авторизации");
             }
         }

@@ -24,19 +24,19 @@ namespace Infrastructure.Services
 
         public async Task<string> GenerateRToken(Guid userId)
         {
-            var refresh_token = Guid.NewGuid().ToString().Replace("-", "");
+            var refreshToken = Guid.NewGuid().ToString().Replace("-", "");
 
             var rToken = new RToken
             {
                 UserId = userId,
-                RefreshToken = refresh_token,
+                RefreshToken = refreshToken,
                 IsStop = false
             };
 
             _context.RTokens.Add(rToken);
             await _context.SaveChangesAsync(new CancellationToken());
 
-            return refresh_token;
+            return refreshToken;
         }
 
         public async Task<string> RefreshToken(Guid userId, string refreshToken)

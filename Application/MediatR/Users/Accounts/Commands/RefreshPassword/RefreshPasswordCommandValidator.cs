@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Application.MediatR.Accounts.Commands.RefreshPassword
+namespace Application.MediatR.Users.Accounts.Commands.RefreshPassword
 {
     public class RefreshPasswordCommandValidator : AbstractValidator<RefreshPasswordCommand>
     {
