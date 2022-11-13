@@ -8,6 +8,7 @@ namespace WebAPI.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [Produces("application/json")]
+    [ApiController]
     public class AccountController : BaseController
     {
         /// <summary>
