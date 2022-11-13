@@ -53,4 +53,3 @@ namespace Application.MediatR.Users.Events.Queries.GetEvents
         }
     }
 }
-}
